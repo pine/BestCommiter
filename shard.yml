@@ -1,0 +1,12 @@
+name: best_comitter
+version: 0.1.0
+
+dependencies:
+  github_simple:
+    github: pine613/crystal-github-simple
+    branch: master
+
+authors:
+  - Pine Mizune <pinemz@gmail.com>
+
+license: MIT

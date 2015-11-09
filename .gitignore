@@ -1,0 +1,12 @@
+/doc/
+/libs/
+/bin/
+/.crystal/
+/.shards/
+shard.lock
+
+*.swo
+*.swp
+*~
+
+config.yml
