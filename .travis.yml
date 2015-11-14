@@ -1,1 +1,24 @@
-language: crystal
+language: c
+sudo: false
+
+env:
+  global:
+    - PATH=$HOME/.crenv/bin:$PATH
+  matrix:
+    - CRYSTAL_VERSION=0.9.0
+    - CRYSTAL_VERSION=0.9.1
+
+install:
+  - curl -L https://raw.github.com/pine613/crenv/master/install.sh | bash
+  - eval "$(crenv init -)"
+  - crenv install $CRYSTAL_VERSION
+  - crenv global $CRYSTAL_VERSION
+  - crystal --version
+
+before_script:
+  - make install
+
+script:
+  - make build
+  - make release
+  - make test
