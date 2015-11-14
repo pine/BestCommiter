@@ -23,7 +23,7 @@ module BestComitter
 
       repo_names = events.map { |event|
         case event.type
-        when PUSH_EVENT, ISSUES_EVENT, PULL_REQUEST_EVENT
+        when PUSH_EVENT
           event.repo.name
         end
       }.compact.uniq
