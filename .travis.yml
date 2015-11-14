@@ -20,5 +20,4 @@ before_script:
 
 script:
   - make build
-  - make release
   - make test
