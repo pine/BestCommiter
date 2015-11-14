@@ -9,4 +9,9 @@ shard.lock
 *.swp
 *~
 
+.DS_Store
+
+*.tar.gz
+*.a
+
 config.yml
