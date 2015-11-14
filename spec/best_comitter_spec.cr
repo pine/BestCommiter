@@ -1,9 +1,5 @@
 require "./spec_helper"
 
 describe BestCommiter do
-  # TODO: Write tests
-
-  it "works" do
-    false.should eq(true)
-  end
+  it "works" { }
 end

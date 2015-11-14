@@ -35,6 +35,11 @@ Usage:
         parser.on("-d DAYS", "--days DAYS", "Counting days") { |x| days = x.to_i }
       end
 
+      if args.size == 0
+        show_help(parser)
+        return
+      end
+
       config = load_config
       after = Time.now
       before = after - days.days
