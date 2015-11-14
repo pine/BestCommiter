@@ -1,4 +1,4 @@
-# BestComitter
+# BestComitter [![Build Status](https://travis-ci.org/pine613/BestCommiter.svg)](https://travis-ci.org/pine613/BestCommiter)
 
 The GitHub commits count tool for developer
 
