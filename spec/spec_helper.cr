@@ -1,2 +1,2 @@
 require "spec"
-require "../src/best_comitter"
+require "../src/best_commiter"

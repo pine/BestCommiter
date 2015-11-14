@@ -1,7 +1,7 @@
 require "github_simple"
 require "../github"
 
-module BestComitter
+module BestCommiter
   class PublicCommitCounter
     include GitHub::EventType
 

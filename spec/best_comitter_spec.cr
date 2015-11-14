@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe BestComitter do
+describe BestCommiter do
   # TODO: Write tests
 
   it "works" do

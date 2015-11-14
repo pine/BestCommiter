@@ -1,6 +1,6 @@
 require "yaml"
 
-module BestComitter
+module BestCommiter
   module Config
     class GitHub
       YAML.mapping({

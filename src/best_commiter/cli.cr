@@ -4,7 +4,7 @@ require "./version"
 require "./config"
 require "./counter/*"
 
-module BestComitter
+module BestCommiter
   class CLI
     def initialize
     end
@@ -24,11 +24,11 @@ module BestComitter
         parser.banner = "
 Usage:
 
-  $ ./bin/best_comitter public --days 7
-  Show Best OSS Comitter
+  $ ./bin/best_commiter public --days 7
+  Show Best OSS Commiter
 
-  $ ./bin/best_comitter private --days 7
-  Show Best Comitter
+  $ ./bin/best_commiter private --days 7
+  Show Best Commiter
         "
         parser.on("-v", "--version", "Show version") { show_version }
         parser.on("-h", "--help", "Show help") { show_help(parser) }
@@ -54,7 +54,7 @@ Usage:
     end
 
     def show_version
-      puts "BestComitter v#{BestComitter::VERSION}"
+      puts "BestCommiter v#{BestCommiter::VERSION}"
     end
 
     def show_help(parser)

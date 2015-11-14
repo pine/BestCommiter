@@ -27,7 +27,7 @@ install:
 
 build:
 	mkdir -p bin
-	crystal build --release src/best_comitter.cr -o bin/best_comitter
+	crystal build --release src/best_commiter.cr -o bin/best_commiter
 
 release:
 	if [ "$(OS)" = "darwin" ] ; then \
@@ -35,8 +35,8 @@ release:
 		chmod 644 libyaml.a ;\
 		export LIBRARY_PATH= ;\
 	fi
-	crystal build --release -o bin/best_comitter src/best_comitter.cr $(CRFLAGS)
-	tar zcvf best_comitter_$(OS)_$(ARCH).tar.gz bin/best_comitter
+	crystal build --release -o bin/best_commiter src/best_commiter.cr $(CRFLAGS)
+	tar zcvf best_commiter_$(OS)_$(ARCH).tar.gz bin/best_commiter
 
 test:
 	crystal spec
