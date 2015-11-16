@@ -15,7 +15,7 @@ default: all
 all: clean install build test
 
 
-.PHONY: install build test
+.PHONY: clean install build test
 
 clean:
 	rm -rf .shards
