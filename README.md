@@ -3,7 +3,7 @@
 The GitHub commits count tool for developer
 
 ## Installation
-First, you must install [Crystal](http://crystal-lang.org/) v0.9.1.
+First, you should install [Crystal](http://crystal-lang.org/) compiler v0.9.1, using a tool such as [crenv](https://github.com/pine613/crenv).
 
 ```sh
 $ make
