@@ -14,7 +14,20 @@ $ make
 ```sh
 $ cp config.sample.yml config.yml
 $ vim config.yml # edit your configuration
+
 $ ./bin/best_comitter --help
+Usage:
+
+  $ ./bin/best_commiter public --days 7
+  Show Best OSS Commiter
+
+  $ ./bin/best_commiter private --days 7
+  Show Best Commiter
+
+    -v, --version                    Show version
+    -h, --help                       Show help
+    -d DAYS, --days DAYS             Counting days
+
 $ ./bin/best_comitter public --days 7
 ```
 
