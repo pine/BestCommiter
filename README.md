@@ -12,7 +12,8 @@ $ make
 ## Usage
 
 ```sh
-$ vim config.yml # edit configuration
+$ cp config.sample.yml config.yml
+$ vim config.yml # edit your configuration
 $ ./bin/best_comitter --help
 $ ./bin/best_comitter public --days 7
 ```
