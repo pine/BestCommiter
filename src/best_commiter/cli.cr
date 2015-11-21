@@ -50,9 +50,13 @@ Usage:
 
       case args[0]?
       when "public"
-        count_public(config, github, before, after)
+        counter = PublicCommitCounter.new(config, github)
+        title = "Best OSS Commiter"
+        count(counter, config, github, before, after, title)
       when "private"
-        count_private
+        counter = PrivateCommitCounter.new(config, github)
+        title = "Best Commiter"
+        count(counter, config, github, before, after, title)
       else
         show_help(parser)
       end
@@ -68,9 +72,13 @@ Usage:
       exit
     end
 
-    def count_public(config, github, before, after)
-      counter = PublicCommitCounter.new(config, github)
+    def count(counter, config, github, before, after, title = nil)
       results = counter.count(before, after)
+
+      if title
+        puts title
+        puts
+      end
 
       puts "FROM: #{before}"
       puts "TO  : #{after}"
@@ -85,10 +93,6 @@ Usage:
           puts
         end
       end
-    end
-
-    def count_private
-      puts "Counting private repositories commits count ..."
     end
 
     private def load_config
