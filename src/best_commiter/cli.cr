@@ -18,7 +18,7 @@ module BestCommiter
     end
 
     private def run_with_args(args)
-      days = 0
+      days = 7
 
       parser = OptionParser.parse(args) do |parser|
         parser.banner = "
