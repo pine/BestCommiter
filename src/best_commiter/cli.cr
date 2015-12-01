@@ -63,7 +63,8 @@ Usage:
     end
 
     def show_version
-      puts "BestCommiter v#{BestCommiter::VERSION}"
+      puts "v#{BestCommiter::VERSION}"
+      exit
     end
 
     def show_help(parser)
