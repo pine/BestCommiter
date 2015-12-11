@@ -1,3 +1,3 @@
 module BestCommiter
-  VERSION = "0.2.1"
+  VERSION = {{ `cat VERSION`.stringify.chomp }}
 end
