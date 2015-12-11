@@ -21,7 +21,7 @@ $ make
 $ cp config.sample.yml config.yml
 $ vim config.yml # edit your configuration
 $ ./bin/best_comitter --help # show command help
-$ ./bin/best_comitter public --days 7 # show public repository
+$ ./bin/best_comitter public --days 7 --sort-by count # show public repository
 $ ./bin/best_comitter private --days 7 # show private repository
 ```
 
