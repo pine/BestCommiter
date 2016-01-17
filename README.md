@@ -7,10 +7,10 @@ First, you should install [Crystal](http://crystal-lang.org/) compiler v0.9.1, u
 
 ```sh
 $ crystal -v
-Crystal 0.9.1 [b3b1223] (Fri Oct 30 03:26:53 UTC 2015)
+Crystal 0.10.2 [b2b2d93] (Wed Jan 13 17:00:14 UTC 2016)
 
 $ shards --version
-Shards 0.5.3 [10e3126] (2015-11-04)
+shards 0.5.4 [578eb0a] (2016-01-17)
 
 $ make
 ```
