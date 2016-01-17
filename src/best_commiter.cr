@@ -1,4 +1,4 @@
 require "./best_commiter/*"
 
 cli = BestCommiter::CLI.new
-cli.run(ARGV)
+cli.try_run(ARGV)

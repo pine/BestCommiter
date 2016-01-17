@@ -5,6 +5,7 @@ require "./config"
 require "./counter/*"
 require "./commands/*"
 require "./models/*"
+require "./option_parser"
 require "./printer"
 
 module BestCommiter
@@ -12,67 +13,36 @@ module BestCommiter
     def initialize
     end
 
-    def run(args)
+    def try_run(args : Array(String))
       begin
-        run_with_args(args)
+        run(args)
       rescue OptionParser::MissingOption
         puts "Missing arguments"
       end
     end
 
-    private def run_with_args(args)
-      days = 7
-      sort_by = "name"
-
-      parser = OptionParser.parse(args) do |parser|
-        parser.banner = "
-Usage:
-
-  $ ./bin/best_commiter public --days 7
-  Show Best OSS Commiter
-
-  $ ./bin/best_commiter private --days 7
-  Show Best Commiter
-        "
-        parser.on("-v", "--version", "Show version") { Commands::Version.run }
-        parser.on("-h", "--help", "Show help") { Commands::Help.run(parser) }
-        parser.on("-d DAYS", "--days DAYS", "Counting days") { |x| days = x.to_i }
-        parser.on("-s COLUMN", "--sort-by COLUM", "Sort by column (name or count)") { |x| sort_by = x }
-      end
+    protected def run(args : Array(String))
+      wrapper = OptionParserWrapper.new
+      parser = wrapper.parse(args)
 
       if args.size == 0
         Commands::Help.run(parser)
         return
       end
 
-      config = load_config
-      after = Time.now
-      before = after - days.days
-      github = GitHub::Simple::Client.new(
-        access_token: config.github.access_token,
-        auto_paginate: true
-      )
+      config = Config::Loader.from_yaml_file("config.yml")
+      period = Models::Period.past(wrapper.days.days)
+      sort_order = Models::SortOrder.from_string(wrapper.sort_order)
+      printer = Printer.new(period, sort_order)
 
       case args[0]?
       when "public"
-        counter = PublicCommitCounter.new(config, github)
-        title = "Best OSS Commiter"
-        show_count(counter, config, github, before, after, sort_by, title)
+        Commands::Counter::Public.run(printer, config)
       when "private"
-        counter = PrivateCommitCounter.new(config, github)
-        title = "Best Commiter"
-        show_count(counter, config, github, before, after, sort_by, title)
+        Commands::Counter::Private.run(printer, config)
       else
         Commands::Help.run(parser)
       end
-    end
-
-    def show_count(counter, config, github, before, after, sort_by, title = nil)
-      Printer.new.run(counter, config, github, before, after, sort_by, title)
-    end
-
-    private def load_config
-      Config::Loader.from_yaml_file("config.yml")
     end
   end
 end

@@ -1,8 +1,16 @@
+require "./models/period"
+
 module BestCommiter
   class Printer
-    def run(counter, config, github, before, after, sort_by, title = nil)
-      results = counter.count(before, after)
-      sorted_results = sort_results(results, sort_by)
+    def initialize(@period : Models::Period, @sort_order : Models::SortOrder)
+    end
+
+    def run(counter)
+      title = counter.title
+      before = @period.before
+      after = @period.after
+      results = counter.count(@period.before, @period.after)
+      sorted_results = sort_users(results)
 
       puts
 
@@ -27,13 +35,15 @@ module BestCommiter
       end
     end
 
-    private def sort_results(results, sort_by)
-      if sort_by == "count"
-        return results.sort_by { |result|
-          result.sum
-        }.reverse
+    private def sort_users(users : Array(Models::User)) : Array(Models::User)
+      case @sort_order
+      when Models::SortOrder::Name
+        users.sort { |a, b| a.name <=> b.name }
+      when Models::SortOrder::Count
+        users.sort_by { |user| user.sum }.reverse
+      else
+        [] of Models::User
       end
-      results.sort { |a, b| a.name <=> b.name }
     end
   end
 end

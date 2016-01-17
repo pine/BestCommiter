@@ -5,9 +5,7 @@ module BestCommiter::Models
     getter name :: String
     getter repos :: Array(Repo)
 
-    def initialize(name : String, repos : Array(Repo))
-      @name = name
-      @repos = repos
+    def initialize(@name : String, @repos : Array(Repo))
     end
 
     def sum : Int32

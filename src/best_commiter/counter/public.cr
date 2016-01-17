@@ -8,11 +8,15 @@ module BestCommiter
     include GitHub::EventType
     include CounterUtils
 
-    def initialize(@config, @github)
+    def initialize(@github, @user_names)
+    end
+
+    def title
+      "Best OSS Commiter"
     end
 
     def count(before, after)
-      users = @config.users || [] of String
+      users = @user_names || [] of String
       repo_names = users.map { |user| repo_names_by_user(user) }.flatten.uniq.sort
       commits = repo_names.map { |name| commits_by_repo_name(name, before, after) }.flatten
       users.map { |user| Models::User.new(user, count_by_commits(user, commits)) }
