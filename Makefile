@@ -39,4 +39,4 @@ release:
 	tar zcvf best_commiter_$(OS)_$(ARCH).tar.gz bin/best_commiter
 
 test:
-	crystal spec
+	crystal spec -v
