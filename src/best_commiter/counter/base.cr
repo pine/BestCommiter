@@ -1,15 +1,30 @@
-require "github_simple"
 require "../github"
-require "../models/repo"
 
-module BestCommiter
-  module CounterUtils
+module BestCommiter::Counter
+  class Base
     include GitHub::EventType
 
-    protected def repo_names_by_user(github, user)
+    protected def initialize(@github)
+    end
+
+    protected def commits_by_repo_name(name, period : Models::Period)
+      puts "Fetch #{name} commits"
+
+      owner, repo = name.split("/")
+      format = Time::Format.new("%Y-%m-%dT%H:%M:%S%z")
+      before = format.format(period.before)
+      after = format.format(period.after)
+
+      commits = @github.repos(owner, repo).commits({"since": before, "until": after})
+      printf "> Found %3d commits\n\n", commits.size
+
+      commits.map { |commit| {name, commit} }
+    end
+
+    protected def repo_names_by_user(user)
       puts "Fetch #{user}'s events"
 
-      events = github.users(user).events(public: true)
+      events = @github.users(user).events(public: true)
       printf "> Found %3d events\n", events.size
 
       repo_names = events.map { |event|
@@ -21,20 +36,6 @@ module BestCommiter
 
       printf "> Found %3d repositories\n\n", repo_names.size
       repo_names
-    end
-
-    protected def commits_by_repo_name(github, name, before, after)
-      puts "Fetch #{name} commits"
-
-      owner, repo = name.split("/")
-      format = Time::Format.new("%Y-%m-%dT%H:%M:%S%z")
-      before = format.format(before)
-      after = format.format(after)
-
-      commits = github.repos(owner, repo).commits({"since": before, "until": after})
-      printf "> Found %3d commits\n\n", commits.size
-
-      commits.map { |commit| {name, commit} }
     end
 
     protected def count_by_commits(user_name, commits)

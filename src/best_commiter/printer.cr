@@ -6,21 +6,14 @@ module BestCommiter
     end
 
     def run(counter)
-      title = counter.title
-      before = @period.before
-      after = @period.after
-      results = counter.count(@period.before, @period.after)
+      results = counter.run(@period)
       sorted_results = sort_users(results)
 
       puts
-
-      if title
-        puts title
-        puts
-      end
-
-      puts "FROM: #{before}"
-      puts "TO  : #{after}"
+      puts counter.title
+      puts
+      puts "FROM: #{@period.before}"
+      puts "TO  : #{@period.after}"
       puts
 
       sorted_results.each do |result|

@@ -1,29 +1,23 @@
 require "github_simple"
+
+require "./base"
 require "../github"
-require "./mixin"
 require "../models/user"
+require "../models/period"
 
-module BestCommiter
-  class PrivateCommitCounter
-    include GitHub::EventType
-    include CounterUtils
-
-    def initialize(@github, @users,@repos)
+module BestCommiter::Counter
+  class PrivateCommitCounter < Base
+    def initialize(github, @user_names, @repo_names)
+      super(github)
     end
 
     def title
       "Best Commiter"
     end
 
-    def count(before, after)
-      users = @users || [] of String
-      repo_names = @repos || [] of String
-      commits = repo_names.map { |name| commits_by_repo_name(name, before, after) }.flatten
-      users.map { |user| Models::User.new(user, count_by_commits(user, commits)) }
-    end
-
-    protected def commits_by_repo_name(name, before, after)
-      commits_by_repo_name(@github, name, before, after)
+    def run(period : Models::Period)
+      commits = @repo_names.map { |name| commits_by_repo_name(name, period) }.flatten
+      @user_names.map { |user| Models::User.new(user, count_by_commits(user, commits)) }
     end
   end
 end

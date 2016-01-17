@@ -1,8 +1,6 @@
 require "option_parser"
 
-require "./version"
 require "./config"
-require "./counter/*"
 require "./commands/*"
 require "./models/*"
 require "./option_parser"

@@ -9,7 +9,7 @@ module BestCommiter::Commands::Counter
     end
 
     def run
-      counter = PublicCommitCounter.new(@github, @config.users)
+      counter = Counter::PublicCommitCounter.new(@github, @config.users)
       @printer.run(counter)
     end
   end
