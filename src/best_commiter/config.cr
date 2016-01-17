@@ -2,22 +2,24 @@ require "yaml"
 
 module BestCommiter
   module Config
-    class GitHub
-      YAML.mapping({
-        access_token: String,
-      })
+    module Loader
+      def self.from_yaml_file(file)
+        Root.from_yaml File.read(file)
+      end
     end
 
-    class Config
+    class Root
       YAML.mapping({
         github: GitHub,
         users:  Array(String),
         repos:  Array(String),
       })
+    end
 
-      def self.from_yaml_file(file)
-        from_yaml File.read(file)
-      end
+    class GitHub
+      YAML.mapping({
+        access_token: String,
+      })
     end
   end
 end

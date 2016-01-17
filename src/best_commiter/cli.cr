@@ -104,7 +104,7 @@ Usage:
     end
 
     private def load_config
-      Config::Config.from_yaml_file("config.yml")
+      Config::Loader.from_yaml_file("config.yml")
     end
 
     private def sort_results(results, sort_by)
