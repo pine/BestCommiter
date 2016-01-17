@@ -27,7 +27,7 @@ install:
 
 build:
 	mkdir -p bin
-	crystal build --release src/best_commiter.cr -o bin/best_commiter
+	crystal build src/best_commiter.cr -o bin/best_commiter
 
 release:
 	if [ "$(OS)" = "darwin" ] ; then \

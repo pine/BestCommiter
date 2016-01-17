@@ -9,8 +9,11 @@ module BestCommiter::Counter
 
     protected def commits_by_repo_name(name, period : Models::Period)
       puts "Fetch #{name} commits"
+      pair = name.split("/")
 
-      owner, repo = name.split("/")
+      raise "Invalid repository format: #{name}" if pair.size < 2
+
+      owner, repo = pair
       format = Time::Format.new("%Y-%m-%dT%H:%M:%S%z")
       before = format.format(period.before)
       after = format.format(period.after)
