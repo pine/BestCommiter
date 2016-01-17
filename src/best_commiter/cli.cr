@@ -33,13 +33,13 @@ Usage:
   Show Best Commiter
         "
         parser.on("-v", "--version", "Show version") { Commands::Version.run }
-        parser.on("-h", "--help", "Show help") { show_help(parser) }
+        parser.on("-h", "--help", "Show help") { Commands::Help.run(parser) }
         parser.on("-d DAYS", "--days DAYS", "Counting days") { |x| days = x.to_i }
         parser.on("-s COLUMN", "--sort-by COLUM", "Sort by column (name or count)") { |x| sort_by = x }
       end
 
       if args.size == 0
-        show_help(parser)
+        Commands::Help.run(parser)
         return
       end
 
@@ -61,14 +61,8 @@ Usage:
         title = "Best Commiter"
         show_count(counter, config, github, before, after, sort_by, title)
       else
-        show_help(parser)
+        Commands::Help.run(parser)
       end
-    end
-
-    def show_help(parser)
-      puts parser
-      puts
-      exit
     end
 
     def show_count(counter, config, github, before, after, sort_by, title = nil)
