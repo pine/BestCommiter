@@ -3,6 +3,7 @@ require "option_parser"
 require "./version"
 require "./config"
 require "./counter/*"
+require "./commands/*"
 
 module BestCommiter
   class CLI
@@ -31,7 +32,7 @@ Usage:
   $ ./bin/best_commiter private --days 7
   Show Best Commiter
         "
-        parser.on("-v", "--version", "Show version") { show_version }
+        parser.on("-v", "--version", "Show version") { Commands::Version.run }
         parser.on("-h", "--help", "Show help") { show_help(parser) }
         parser.on("-d DAYS", "--days DAYS", "Counting days") { |x| days = x.to_i }
         parser.on("-s COLUMN", "--sort-by COLUM", "Sort by column (name or count)") { |x| sort_by = x }
@@ -62,11 +63,6 @@ Usage:
       else
         show_help(parser)
       end
-    end
-
-    def show_version
-      puts "v#{BestCommiter::VERSION}"
-      exit
     end
 
     def show_help(parser)
