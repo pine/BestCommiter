@@ -1,5 +1,6 @@
 require "github_simple"
 require "../github"
+require "../models/repo"
 
 module BestCommiter
   module CounterUtils
@@ -53,7 +54,9 @@ module BestCommiter
       end
 
       printf "> Found %3d commits\n\n", commits_count
-      filtered_repos
+      filtered_repos.map do |k, v|
+        Models::Repo.new(k, v)
+      end
     end
   end
 end
