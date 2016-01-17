@@ -3,7 +3,10 @@ require "../version"
 module BestCommiter::Commands
   class Version
     def self.run
-      Version.new.run
+      new.run
+    end
+
+    protected def initialize
     end
 
     def run
