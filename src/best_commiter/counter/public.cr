@@ -1,7 +1,7 @@
 require "github_simple"
 
-require "../github"
 require "./base"
+require "../github"
 require "../models/user"
 
 module BestCommiter::Counter
